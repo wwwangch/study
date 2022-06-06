@@ -10,7 +10,7 @@
         <!-- 格式化输出：%date 表示日期，%thread 表示线程名，%-5level：级别从左显示 5 个字符宽度 %msg：日志消息，%n 是换行符-->
         <!-- %logger{36} 表示 Logger 名字最长 36 个字符 -->
         <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%logger{50}:%L] - %msg%n"/>
-        <property name="LOG_CONSOLE_PATTERN" value="%style{%d{ISO8601}}{bright,green} %highlight{%-5level} [%style{%t}{bright,blue}] %style{%C{}}{bright,yellow}: %msg%n%style{%throwable}{red}"/>
+        <property name="LOG_CONSOLE_PATTERN" value="%t %T %c{5.} %C %d{yyyy-MM-dd HH:mm:ss.SSS} %F %L %l%n"/>
         <property name="ACCESS_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} - %msg%n"/>
 
         <!-- 定义日志存储的路径 -->
@@ -22,8 +22,9 @@
         <!--*********************控制台日志***********************-->
         <Console name="consoleAppender" target="SYSTEM_OUT">
             <!--设置日志格式及颜色-->
-            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+            <PatternLayout pattern="${LOG_CONSOLE_PATTERN}" charset="UTF-8"/>
         </Console>
+
 
         <!--info级别日志-->
         <!-- 这个会打印出所有的info及以上级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
