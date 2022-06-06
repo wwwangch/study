@@ -18,6 +18,7 @@
         <module>es8.0-test</module>
         <module>quartz-test</module>
         <module>base</module>
+        <module>poi-test</module>
     </modules>
 
     <properties>

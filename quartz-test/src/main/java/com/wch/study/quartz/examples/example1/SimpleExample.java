@@ -21,11 +21,9 @@ import static org.quartz.DateBuilder.evenMinuteDate;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerFactory;
-import org.quartz.Trigger;
+import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.triggers.SimpleTriggerImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,6 +73,10 @@ public class SimpleExample {
     // wait long enough so that the scheduler as an opportunity to
     // run the job!
     log.info("------- Waiting 65 seconds... -------------");
+    int i=0;
+    if (i==0){
+      throw new NullPointerException("3434");
+    }
     try {
       // wait 65 seconds to show job
       Thread.sleep(65L * 1000L);
