@@ -7,6 +7,8 @@ import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import co.elastic.clients.elasticsearch.core.bulk.IndexOperation;
 import co.elastic.clients.elasticsearch.core.bulk.UpdateOperation;
 import co.elastic.clients.elasticsearch.indices.*;
+import co.elastic.clients.elasticsearch.xpack.usage.SecurityRolesDls;
+import co.elastic.clients.util.ObjectBuilder;
 import com.wch.study.es8.Es8TestApplication;
 import com.wch.study.es8.entity.Dict;
 import org.junit.Test;
@@ -122,4 +124,5 @@ public class OperationTest {
                 .id("Tvrg_oABqCc1j0_yMaQ2")));
         System.out.println(delete.result());
     }
+
 }
