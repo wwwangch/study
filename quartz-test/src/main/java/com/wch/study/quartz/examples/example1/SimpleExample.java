@@ -62,6 +62,7 @@ public class SimpleExample {
 
     // Tell quartz to schedule the job using our trigger
     sched.scheduleJob(job, trigger);
+
     log.info(job.getKey() + " will run at: " + runTime);
 
     // Start up the scheduler (nothing can actually run until the
@@ -73,10 +74,6 @@ public class SimpleExample {
     // wait long enough so that the scheduler as an opportunity to
     // run the job!
     log.info("------- Waiting 65 seconds... -------------");
-    int i=0;
-    if (i==0){
-      throw new NullPointerException("3434");
-    }
     try {
       // wait 65 seconds to show job
       Thread.sleep(65L * 1000L);

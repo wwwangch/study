@@ -21,6 +21,7 @@
         <module>poi-test</module>
         <module>netty-test</module>
         <module>curator-test</module>
+        <module>es-jdbc-test</module>
     </modules>
 
     <properties>

@@ -39,7 +39,9 @@ public class RemoteServerExample {
 
     // First we must get a reference to a scheduler
     SchedulerFactory sf = new StdSchedulerFactory();
+
     Scheduler sched = sf.getScheduler();
+
 
     log.info("------- Initialization Complete -----------");
 
