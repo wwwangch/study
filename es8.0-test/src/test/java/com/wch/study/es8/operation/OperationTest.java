@@ -2,6 +2,8 @@ package com.wch.study.es8.operation;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.mapping.DynamicMapping;
+import co.elastic.clients.elasticsearch.cat.ElasticsearchCatClient;
+import co.elastic.clients.elasticsearch.cat.IndicesResponse;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import co.elastic.clients.elasticsearch.core.bulk.IndexOperation;
@@ -32,12 +34,15 @@ import java.util.List;
 public class OperationTest {
 
     @Autowired
-    private ElasticsearchClient client;
+    private ElasticsearchClient esWriteClient;
+
+    @Autowired
+    private ElasticsearchClient esReadClient;
 
 
     @Test
     public void contextLoads() throws IOException {
-        client.ping();
+        esWriteClient.ping();
         System.out.println(11);
     }
 
@@ -55,14 +60,14 @@ public class OperationTest {
 
                         )
         );
-        CreateIndexResponse createIndexResponse = client.indices().create(request);
+        CreateIndexResponse createIndexResponse = esWriteClient.indices().create(request);
         System.out.println(createIndexResponse.acknowledged());
 
     }
 
     @Test
     public void deleteIndex() throws IOException {
-        DeleteIndexResponse dict = client.indices().delete(DeleteIndexRequest.of(req ->
+        DeleteIndexResponse dict = esWriteClient.indices().delete(DeleteIndexRequest.of(req ->
                 req.index("dict")));
         System.out.println(dict.acknowledged());
     }
@@ -70,7 +75,7 @@ public class OperationTest {
     @Test
     public void updateMapping() throws IOException {
 
-        PutMappingResponse putMappingResponse = client.indices().putMapping(PutMappingRequest.of(builder ->
+        PutMappingResponse putMappingResponse = esWriteClient.indices().putMapping(PutMappingRequest.of(builder ->
                 builder.index("dict")
                         .properties("createTime", probuilder ->
                                 probuilder.date(dateBuilder ->
@@ -85,7 +90,7 @@ public class OperationTest {
         dict.setDictLabel("疯狂请安");
         dict.setDictValue("2332");
         dict.setCreateTime(new Date());
-        IndexResponse indexResponse = client.index(IndexRequest.of(req ->
+        IndexResponse indexResponse = esWriteClient.index(IndexRequest.of(req ->
                 req.index("dict")
                         .document(dict)));
         System.out.println(indexResponse.id());
@@ -110,8 +115,8 @@ public class OperationTest {
             int finalI = i;
             bulkOperations.add(BulkOperation.of(builder -> builder.index(IndexOperation.of(docBuilder -> docBuilder.document(dicts.get(finalI))))));
         }
-        client.bulk(BulkRequest.of(req ->
-                        req.index("dict")
+        esWriteClient.bulk(BulkRequest.of(req ->
+                        req.index("dict2")
                                 .operations(bulkOperations
                                 )
                 )
@@ -120,9 +125,18 @@ public class OperationTest {
 
     @Test
     public void deleteDoc() throws IOException {
-        DeleteResponse delete = client.delete(DeleteRequest.of(builder -> builder.index("dict")
+        DeleteResponse delete = esWriteClient.delete(DeleteRequest.of(builder -> builder.index("dict")
                 .id("Tvrg_oABqCc1j0_yMaQ2")));
         System.out.println(delete.result());
+    }
+
+    @Test
+    public void cat() throws IOException {
+        ElasticsearchCatClient cat = esReadClient.cat();
+        IndicesResponse indices = cat.indices();
+
+        System.out.println(11);
+
     }
 
 }

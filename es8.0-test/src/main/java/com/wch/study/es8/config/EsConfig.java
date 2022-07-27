@@ -13,8 +13,6 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.SSLContexts;
-import org.elasticsearch.client.Request;
-import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.springframework.context.annotation.Bean;
@@ -69,5 +67,18 @@ public class EsConfig {
             log.error("es客户端初始化失败");
         }
         return null;
+    }
+
+    @Bean
+    public ElasticsearchClient esReadClient() {
+        HttpHost httpHost = new HttpHost("192.168.100.29", 9200, "HTTP");
+        final ElasticsearchInterceptor elasticsearchInterceptor = new ElasticsearchInterceptor();
+        RestClient restClient = RestClient.builder(httpHost)
+                .setHttpClientConfigCallback(httpAsyncClientBuilder ->
+                        httpAsyncClientBuilder.addInterceptorLast(elasticsearchInterceptor))
+                .build();
+        ElasticsearchTransport elasticsearchTransport = new RestClientTransport(restClient, new JacksonJsonpMapper());
+        ElasticsearchClient elasticsearchClient = new ElasticsearchClient(elasticsearchTransport);
+        return elasticsearchClient;
     }
 }
