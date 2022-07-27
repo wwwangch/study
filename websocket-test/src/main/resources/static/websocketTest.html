@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script>
+        var socket = new SockJS("http://localhost:8080/ws/websocketServer");
+        var stompClient = Stomp.over(socket);
+        // stompClient.heartbeat.outgoing = 2000; // client will send heartbeats every 20000ms
+        // stompClient.heartbeat.incoming = 0;     // client does not want to receive heartbeats
+        // from the server
+        window.onload = function () {
+            connect();
+        }
+        //订阅消息
+        function subscribe() {
+            stompClient.subscribe('/user/queue/wch', function (response) {
+                console.log("/user/queue/wch 你接收到的消息为:" + response);
+            });
+            stompClient.subscribe('/user/topic/wch', function (response) {
+                console.log("/user/topic/wch 你接收到的消息为:" + response);
+            });
+            stompClient.subscribe('/app/topic/wch', function (response) {
+                console.log("/app/topic/wch 你接收到的消息为:" + response);
+            });
+        }
+        function connect() {
+            stompClient.connect({
+                name:"wch"
+                },
+                function connectCallback(frame) {
+                    // 连接成功时（服务器响应 CONNECTED 帧）的回调方法
+                    alert("success");
+                    subscribe();
+                },
+                function errorCallBack(error) {
+                    // 连接失败时（服务器响应 ERROR 帧）的回调方法
+                    alert("error");
+                });
+        };
+        /**
+         * 发送JSON数据体
+         * */
+        function send() {
+            stompClient.send("/app/P2P", {},
+                JSON.stringify({ 'name': 'test' }));
+        }
+
+        function send2() {
+            stompClient.send("/wch/P2P", {},
+                JSON.stringify({ 'name': 'test' }));
+        }
+    </script>
+</head>
+<body>
+
+<input type="text" id="info"/><button onclick="send();">发送</button>
+
+</body>
+</html>
