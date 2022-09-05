@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>com.wch.study</groupId>
-            <artifactId>base</artifactId>
+            <artifactId>web-base</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

@@ -1,14 +1,14 @@
 package com.wch.study.quartz.test;
 
-import static org.quartz.JobBuilder.newJob;
-import static org.quartz.TriggerBuilder.newTrigger;
-import static org.quartz.DateBuilder.evenMinuteDate;
-
-import org.apache.tomcat.jni.User;
+import com.wch.study.quartz.entity.User;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 import java.util.Date;
+
+import static org.quartz.DateBuilder.evenMinuteDate;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
  * @Author wch
@@ -17,27 +17,27 @@ import java.util.Date;
  */
 public class MySimpleTriggerTest {
     public void run() throws SchedulerException {
-        SchedulerFactory schedulerFactory=new StdSchedulerFactory();
+        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         Scheduler scheduler = schedulerFactory.getScheduler();
 
-        JobKey jobKey=new JobKey("job1","group1");
+        JobKey jobKey = new JobKey("job1", "group1");
 
-        JobDataMap jobDataMap=new JobDataMap();
-        jobDataMap.put("wch",new User());
-        JobDetail jobDetail=newJob().withIdentity(jobKey)
+        JobDataMap jobDataMap = new JobDataMap();
+        jobDataMap.put("wch", new User());
+        JobDetail jobDetail = newJob().withIdentity(jobKey)
                 .ofType(SimpleJob.class)
                 .setJobData(jobDataMap)
                 .build();
 
-        Date now=new Date();
+        Date now = new Date();
         Date nextMin = evenMinuteDate(now);
 
-        Trigger trigger=newTrigger()
+        Trigger trigger = newTrigger()
                 .forJob(jobDetail)
                 .startAt(nextMin)
                 .endAt(evenMinuteDate(nextMin))
                 .build();
-        scheduler.scheduleJob(jobDetail,trigger);
+        scheduler.scheduleJob(jobDetail, trigger);
         scheduler.start();
 
         try {
@@ -54,7 +54,7 @@ public class MySimpleTriggerTest {
     }
 
     public static void main(String[] args) throws SchedulerException {
-        MySimpleTriggerTest mySimpleTriggerTest=new MySimpleTriggerTest();
+        MySimpleTriggerTest mySimpleTriggerTest = new MySimpleTriggerTest();
         mySimpleTriggerTest.run();
     }
 }
