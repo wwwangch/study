@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>study</artifactId>
-        <groupId>com.wch</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>com.wch.study</groupId>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wch.study</groupId>
+<!--    <groupId>com.wch.study</groupId>-->
     <artifactId>quartz-test</artifactId>
 
     <properties>
@@ -21,8 +21,21 @@
         <dependency>
             <groupId>com.wch.study</groupId>
             <artifactId>base</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>

@@ -9,32 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>es8.0-test</artifactId>
+    <artifactId>base</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <jakarta.version>2.0.1</jakarta.version>
-        <elasticsearch.version>8.2.0</elasticsearch.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
     <dependencies>
-        <dependency>
-            <groupId>com.wch.study</groupId>
-            <artifactId>base</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.wch.study</groupId>
-            <artifactId>web-base</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>wildfly-common</artifactId>
-                    <groupId>org.wildfly.common</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -48,23 +30,39 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
-            <groupId>co.elastic.clients</groupId>
-            <artifactId>elasticsearch-java</artifactId>
-            <version>${elasticsearch.version}</version>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>jakarta.json</groupId>
-            <artifactId>jakarta.json-api</artifactId>
-            <version>${jakarta.version}</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>
