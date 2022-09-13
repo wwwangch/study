@@ -2,7 +2,6 @@ package com.wch.study.es8.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -12,8 +11,8 @@ import java.util.Date;
  * @Version 1.0
  * @Date 2022/5/27 14:40
  */
+
 @Data
-@Accessors(chain = true)
 public class Dict {
 
     /**

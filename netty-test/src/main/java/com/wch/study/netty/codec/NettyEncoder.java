@@ -1,6 +1,5 @@
 package com.wch.study.netty.codec;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.wch.study.netty.entity.User;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

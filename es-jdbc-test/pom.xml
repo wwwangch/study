@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>study</artifactId>
-        <groupId>com.wch</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>com.wch.study</groupId>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -18,6 +18,19 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.wch.study</groupId>
+            <artifactId>base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wch.study</groupId>
+            <artifactId>web-base</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.elasticsearch.plugin</groupId>
             <artifactId>x-pack-sql-jdbc</artifactId>

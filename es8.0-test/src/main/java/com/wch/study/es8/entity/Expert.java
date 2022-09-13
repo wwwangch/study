@@ -1,4 +1,4 @@
-package entity;
+package com.wch.study.es8.entity;
 
 import lombok.Data;
 
