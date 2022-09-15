@@ -1,14 +1,12 @@
 package com.wch.study.util;
 
 import com.google.common.collect.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 
 /**
  * @author ch w
@@ -17,12 +15,13 @@ import java.util.concurrent.CompletionStage;
  */
 public class DateUtilsTests {
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     @Test
-    public void unsafeTest(){
+    public void unsafeTest() {
         ArrayList<CompletableFuture> completableFutures = Lists.newArrayList();
 
-        for (int i=0;i<10;i++){
-            completableFutures.add(CompletableFuture.runAsync(()->{
+        for (int i = 0; i < 10; i++) {
+            completableFutures.add(CompletableFuture.runAsync(() -> {
                 try {
                     System.out.println(sdf.parse("2022-9-13 11:11:11"));
                 } catch (ParseException e) {
@@ -34,11 +33,11 @@ public class DateUtilsTests {
     }
 
     @Test
-    public void sateTest(){
+    public void sateTest() {
         ArrayList<CompletableFuture> completableFutures = Lists.newArrayList();
 
-        for (int i=0;i<10;i++){
-            completableFutures.add(CompletableFuture.runAsync(()->{
+        for (int i = 0; i < 10; i++) {
+            completableFutures.add(CompletableFuture.runAsync(() -> {
                 try {
                     System.out.println(DateSafeUtils.parse("2022-9-13 11:11:11", "yyyy-MM-dd HH:mm:ss"));
                 } catch (ParseException e) {
