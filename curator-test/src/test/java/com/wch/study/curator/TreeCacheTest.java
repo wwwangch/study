@@ -2,24 +2,19 @@ package com.wch.study.curator;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.TreeCache;
-import org.apache.curator.framework.recipes.locks.InterProcessMutex;
-import org.apache.curator.framework.recipes.locks.InterProcessReadWriteLock;
 import org.apache.zookeeper.CreateMode;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * @Author wch
  * @Version 1.0
  * @Date 2022/6/17 13:44
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {CuratorTestApplication.class})
 public class TreeCacheTest {
 
@@ -29,16 +24,15 @@ public class TreeCacheTest {
     @Test
     public void treeCache() throws Exception {
 
-        final String path="/treeCache";
-        client.create().orSetData().withMode(CreateMode.PERSISTENT).forPath(path,"root".getBytes());
+        final String path = "/treeCache";
+        client.create().orSetData().withMode(CreateMode.PERSISTENT).forPath(path, "root".getBytes());
         Thread.sleep(1000);
         final TreeCache cache = new TreeCache(client, path);
         cache.start();
 
 
-
         cache.getListenable().addListener((client1, event) -> {
-            switch (event.getType()){
+            switch (event.getType()) {
                 case NODE_ADDED:
                     System.out.println("NODE_ADDED:" + event.getData().getPath());
                     break;
@@ -66,11 +60,10 @@ public class TreeCacheTest {
         });
 
 
-
         client.create().withMode(CreateMode.PERSISTENT).forPath(path + "/c1");
         Thread.sleep(1000);
 
-        client.setData().forPath( path, "test".getBytes());
+        client.setData().forPath(path, "test".getBytes());
         Thread.sleep(1000);
 
         client.delete().forPath(path + "/c1");

@@ -3,18 +3,18 @@ package com.wch.study.curator;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.zookeeper.CreateMode;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * @Author wch
  * @Version 1.0
  * @Date 2022/6/17 10:42
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {CuratorTestApplication.class})
 public class PathChildrenCacheTest {
 
@@ -57,13 +57,13 @@ public class PathChildrenCacheTest {
             }
         }));
 
-        client.create().orSetData().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path + "/c1","".getBytes());
+        client.create().orSetData().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT).forPath(path + "/c1", "".getBytes());
         Thread.sleep(1000);
 
-        client.setData().forPath(path+"/c1","c1value".getBytes());
+        client.setData().forPath(path + "/c1", "c1value".getBytes());
         Thread.sleep(1000);
 
-        client.setData().forPath(path+"/c1","c1valuev2".getBytes());
+        client.setData().forPath(path + "/c1", "c1valuev2".getBytes());
         Thread.sleep(1000);
 
         client.delete().forPath(path + "/c1");
@@ -71,8 +71,6 @@ public class PathChildrenCacheTest {
 
         client.delete().forPath(path); //监听节点本身的变化不会通知
         Thread.sleep(1000);
-
-
 
     }
 }
